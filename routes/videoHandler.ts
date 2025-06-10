@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+import * as escapeHtml from 'lodash.escape'
 import fs = require('fs')
 import { type Request, type Response } from 'express'
 import challengeUtils = require('../lib/challengeUtils')
@@ -77,7 +78,7 @@ exports.promotionVideo = () => {
 
 function getSubsFromFile () {
   const subtitles = config.get<string>('application.promotion.subtitles') ?? 'owasp_promo.vtt'
-  const data = fs.readFileSync('frontend/dist/frontend/assets/public/videos/' + subtitles, 'utf8')
+  const data = fs.readFileSync('frontend/dist/frontend/assets/public/videos/' + escapeHtml(subtitles), 'utf8')
   return data.toString()
 }
 
